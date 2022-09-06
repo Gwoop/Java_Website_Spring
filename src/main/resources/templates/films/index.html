@@ -1,28 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>News</title>
+  <title>Films</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <div th:insert="fragments/header :: defaultheader"></div>
 
-<form method="get" action="/news/search">
+<form method="get" action="/films/search">
 
   <input type="text" name="name">
   <input type="submit" value="Найти">
 
 </form>
 
-<div th:each="el : ${news}">
+<div th:each="el : ${films}">
   <h2 th:text="${el.name}"></h2>
-  <h3 th:text="${el.text}"></h3>
-  <h4 th:text="${el.autor}"></h4>
-  <h5 th:text="${el.likes}"></h5>
-  <p th:text="${el.views}"></p>
+  <h3 th:text="${el.dicription}"></h3>
+  <h4 th:text="${el.studio}"></h4>
+  <h5 th:text="${likes}"></h5>
+  <p th:text="${el.dislikes}"></p>
 </div>
 
-<a href="/news/add" class="btn btn-primary">Добавить новость</a>
+<a href="/films/add" class="btn btn-primary">Добавить фильм</a>
 
 </body>
 </html>

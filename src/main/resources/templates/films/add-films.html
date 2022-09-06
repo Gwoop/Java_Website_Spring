@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>News</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:insert="fragments/header :: defaultheader"></div>
+
+<form action="/films/add" method="post">
+  <input type="text" id="name" name="name" placeholder="Название">
+  <input type="text" id="description" name="description" placeholder="Описание фильма">
+  <input type="text" id="studio" name="studio" placeholder="студия">
+  <input type="number" id="likes" name="likes" placeholder="Лайки">
+  <input type="number" id="dislikes" name="dislikes" placeholder="Дизлайки">
+  <input type="submit" value="Добавить новость" class="btn btn-success">
+</form>
+
+<a href="/films/" class="btn btn-primary">Назад</a>
+
+</body>
+</html>

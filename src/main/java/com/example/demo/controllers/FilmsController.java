@@ -1,7 +1,8 @@
 package com.example.demo.controllers;
 
-
+import com.example.demo.models.Films;
 import com.example.demo.models.News;
+import com.example.demo.pacege.Filmsrepository;
 import com.example.demo.pacege.Newrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,41 +15,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 
-@Controller
-@RequestMapping("/news")
-public class NewsController {
 
-//привет
- //   я люблю когда волосатые мужикики обмазваются маслом
+@Controller
+@RequestMapping("/films")
+public class FilmsController {
+
     @Autowired
-    private Newrepository newsRepository;
+    private Filmsrepository newsRepository;
 
     @GetMapping("/")
     public String index(Model model)
     {
-        Iterable<News> news = newsRepository.findAll();
-        model.addAttribute("news",news);
-        return "news/index";
+        Iterable<Films> films = newsRepository.findAll();
+        //Iterable<Films> news = newsRepository.findAll();
+        model.addAttribute("films",films);
+        return "films/index";
     }
 
     @GetMapping("/add")
     public String addView(Model model)
     {
-        return "news/add-news";
+        return "films/add-films";
     }
 
     @PostMapping("/add")
     public String add(
             @RequestParam("name") String name,
-            @RequestParam("autor") String author,
-            @RequestParam("text") String bodyText,
-            @RequestParam("views") Integer views,
+            @RequestParam("description") String description,
+            @RequestParam("studio") String studio,
             @RequestParam("likes") Integer likes,
+            @RequestParam("dislikes") Integer dislikes,
             Model model)
     {
-        News newsOne = new News(name,bodyText,author,likes,views);
-        newsRepository.save(newsOne);
-        return "redirect:/news/add";
+        Films filmsone = new Films(name,description,studio,likes,dislikes);
+
+        newsRepository.save(filmsone);
+        return "redirect:/films/add";
     }
 
 
@@ -57,11 +59,11 @@ public class NewsController {
             @RequestParam("name") String title,
             Model model)
     {
-
-        List<News>  news = newsRepository.findByNameContains(title);
-        model.addAttribute("news",news);
-        return "news/index";
+        List<Films> films = newsRepository.findByName(title);
+        model.addAttribute("films",films);
+        return "films/index";
     }
+
 
 
 

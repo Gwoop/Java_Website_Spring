@@ -18,7 +18,6 @@ public class News {
 
     public News() {
 
-
     }
 
     public News(String name, String text, String autor, int like, int views) {
