@@ -9,12 +9,12 @@ public class FirstController {
 
     @GetMapping("/")
     public String greeting(Model model) {
-        model.addAttribute("name","ну допустим это просто");
+            model.addAttribute("name","ну допустим это просто");
         return "index";
     }
-    @GetMapping("/calcpost")
+  @GetMapping("/calcpost")
     public String calcpost(Model model) {
-        model.addAttribute("name","ну допустим это просто");
+       // model.addAttribute("name","ну допустим это просто");
         return "KalkulPost";
     }
 
