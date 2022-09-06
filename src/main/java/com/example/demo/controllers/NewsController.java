@@ -38,14 +38,14 @@ public class NewsController {
 
     @PostMapping("/add")
     public String add(
-            @RequestParam("title") String title,
-            @RequestParam("author") String author,
-            @RequestParam("body_text") String bodyText,
+            @RequestParam("name") String name,
+            @RequestParam("autor") String author,
+            @RequestParam("text") String bodyText,
             @RequestParam("views") Integer views,
             @RequestParam("likes") Integer likes,
             Model model)
     {
-        News newsOne = new News(title,bodyText,author,views,likes);
+        News newsOne = new News(name,bodyText,author,likes,views);
         newsRepository.save(newsOne);
         return "redirect:/news/add";
     }
@@ -53,11 +53,11 @@ public class NewsController {
 
     @GetMapping("/search")
     public String add(
-            @RequestParam("title") String title,
+            @RequestParam("name") String title,
             Model model)
     {
 
-        List<News>  news = newsRepository.findByTytle(title);
+        List<News>  news = newsRepository.findByName(title);
         model.addAttribute("news",news);
         return "news/index";
     }

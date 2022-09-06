@@ -10,7 +10,7 @@ public interface Newrepository extends CrudRepository<News,Long> {
 
 
 
-        public List<News> findByTytle(String tytle);
-        public List<News> findByCaptnes(String tytle);
+        public List<News> findByName(String Name);
+        public List<News> findByNameContains(String Name);
 
 }

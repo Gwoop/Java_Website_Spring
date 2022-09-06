@@ -15,8 +15,10 @@
 </form>
 
 <div th:each="el : ${news}">
-  <h2 th:text="${el.title}"></h2>
-  <h3 th:text="${el.author}"></h3>
+  <h2 th:text="${el.name}"></h2>
+  <h3 th:text="${el.text}"></h3>
+  <h4 th:text="${el.autor}"></h4>
+  <h5 th:text="${likes}"></h5>
   <p th:text="${el.views}"></p>
 </div>
 
