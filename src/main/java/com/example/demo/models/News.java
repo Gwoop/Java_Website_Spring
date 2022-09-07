@@ -20,12 +20,21 @@ public class News {
 
     }
 
-    public News(String name, String text, String autor, int like, int views) {
+
+    public News(String name, String text, String autor, int likes, int views) {
         this.name = name;
         this.text = text;
         this.autor = autor;
         this.likes = likes;
         this.views = views;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public Long getId() {
@@ -60,13 +69,6 @@ public class News {
         this.autor = autor;
     }
 
-    public int getLike() {
-        return likes;
-    }
-
-    public void setLike(int likes) {
-        this.likes = likes;
-    }
 
     public int getViews() {
         return views;

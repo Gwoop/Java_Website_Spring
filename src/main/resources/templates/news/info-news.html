@@ -21,11 +21,11 @@
   <h5 th:text="${el.likes}"></h5>
   <p th:text="${el.views}"></p>
 
-  <a th:href="'/news/'+ ${el.id}">Прочетать статью</a>
+  <a th:href="'/news/del/' + ${el.id}" class="btn btn-primary">удалить</a>
 
 </div>
 
-<a href="/news/add" class="btn btn-primary">Добавить новость</a>
+<a href="/news/" class="btn btn-primary">Назад</a>
 
 </body>
 </html>

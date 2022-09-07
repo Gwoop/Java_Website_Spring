@@ -6,12 +6,11 @@ import com.example.demo.pacege.Newrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -52,15 +51,41 @@ public class NewsController {
     }
 
 
+
     @GetMapping("/search")
     public String add(
             @RequestParam("name") String title,
             Model model)
     {
 
+        //newsRepository.delete(News(1));
+
         List<News>  news = newsRepository.findByNameContains(title);
         model.addAttribute("news",news);
         return "news/index";
+    }
+
+
+    @GetMapping("/{id}")
+    public String read(
+            @PathVariable("id") Long id,
+            Model model)
+    {
+
+        Optional<News> news = newsRepository.findById(id);
+        ArrayList<News> newsArrayList = new ArrayList<>();
+        news.ifPresent(newsArrayList::add);
+        model.addAttribute("news",newsArrayList);
+        return "news/info-news";
+    }
+
+    @GetMapping("/del/{id}")
+    public String del(@PathVariable("id") Long id)
+    {
+
+        newsRepository.deleteById(id);
+
+        return "redirect:/news/";
     }
 
 
