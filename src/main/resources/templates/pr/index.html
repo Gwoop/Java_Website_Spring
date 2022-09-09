@@ -20,6 +20,10 @@
   <h4 th:text="${el.prepod}"></h4>
   <h5 th:text="${el.data}"></h5>
   <p th:text="${el.kolvo}"></p>
+
+  <a th:href="'/pr/'+ ${el.id}">Прочетать статью</a>
+  <a th:href="'/pr/edit/'+ ${el.id}">изменить</a>
+
 </div>
 
 <a href="/pr/add" class="btn btn-primary">Добавить новость</a>

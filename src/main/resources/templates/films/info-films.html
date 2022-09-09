@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Films</title>
+  <title>News</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -18,13 +18,14 @@
   <h2 th:text="${el.name}"></h2>
   <h3 th:text="${el.dicription}"></h3>
   <h4 th:text="${el.studio}"></h4>
-  <h5 th:text="${likes}"></h5>
+  <h5 th:text="${el.likes}"></h5>
   <p th:text="${el.dislikes}"></p>
 
+  <a th:href="'/films/del/' + ${el.id}" class="btn btn-primary">удалить</a>
 
-  <a th:href="'/films/'+ ${el.id}">Прочетать статью</a>
-  <a th:href="'/films/edit/'+ ${el.id}">изменить</a>
 </div>
-<a href="/films/add" class="btn btn-primary">Добавить фильм</a>
+
+<a href="/films/" class="btn btn-primary">Назад</a>
+
 </body>
 </html>

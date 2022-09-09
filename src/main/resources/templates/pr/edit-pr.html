@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit-pr</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:insert="fragments/header :: defaultheader"></div>
+
+<div th:each="el : ${pr}">
+  <form th:action="'/pr/edit/'+ ${el.id}" method="post">
+    <p>Заголовок</p>
+    <input type="text" th:value="${el.name}" id="name" name="name" placeholder="Название практической">
+    <p></p>
+    <input type="text" th:value="${el.predmet}"id="predmet" name="predmet" placeholder="Предмет">
+    <input type="text" th:value="${el.prepod}"id="prepod" name="prepod" placeholder="Преподаватель">
+    <input type="text"th:value="${el.data}" id="data" name="data" placeholder="Дата">
+    <input type="number"th:value="${el.kolvo}" id="kolvo" name="kolvo" placeholder="кол-во">
+
+    <input type="submit" value="Изменить" class="btn btn-success">
+  </form>
+
+</div>
+
+
+
+<a href="/pr/" class="btn btn-primary">назад</a>
+
+</body>
+</html>

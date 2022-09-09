@@ -5,15 +5,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class News {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     Long id;
-    String name,text,autor;
+   /* String name,text,autor;
     int likes;
-    int views;
+    int views;*/
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 1000)
+    String name;
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 1000)
+    String text;
+    @NotNull(message = "Поле не может быть пустым")
+    String autor;
+    @Min(message = "Число не может быть отрицательным",value = 0)
+    @Max(message = "Число не может быть отрицательным", value = 1000)
+    @NotNull (message = "Обязательно к заполнению")
+    Integer views,likes;
+
 
 
     public News() {
@@ -21,19 +35,11 @@ public class News {
     }
 
 
-    public News(String name, String text, String autor, int likes, int views) {
+    public News(String name, String text, String autor, Integer views, Integer likes) {
         this.name = name;
         this.text = text;
         this.autor = autor;
-        this.likes = likes;
         this.views = views;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
         this.likes = likes;
     }
 
@@ -69,12 +75,19 @@ public class News {
         this.autor = autor;
     }
 
-
-    public int getViews() {
+    public Integer getViews() {
         return views;
     }
 
-    public void setViews(int views) {
+    public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
     }
 }
