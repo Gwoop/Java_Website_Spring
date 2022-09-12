@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Films;
 import com.example.demo.models.News;
 import com.example.demo.pacege.Newrepository;
 import org.springframework.beans.NotWritablePropertyException;
@@ -48,7 +49,7 @@ public class NewsController {
     @PostMapping("/add")
     public String add( @ModelAttribute("news") @Valid News news, BindingResult bindingResult, Model model)
     {
-        if(bindingResult.hasErrors()) return "/add-news";
+        if(bindingResult.hasErrors()) return "news/add-news";
         newsRepository.save(news);
         return "redirect:/news/add";
     }
@@ -96,27 +97,17 @@ public class NewsController {
         Optional<News> news = newsRepository.findById(id);
         ArrayList<News> newsArrayList = new ArrayList<>();
         news.ifPresent(newsArrayList::add);
-        model.addAttribute("news",newsArrayList);
+        model.addAttribute("news",newsArrayList.get(0));
         return "news/edit-news";
     }
     @PostMapping("/edit/{id}")
-    public String editpost(@PathVariable("id") Long id,
-                           @RequestParam("name") String name,
-                           @RequestParam("autor") String author,
-                           @RequestParam("text") String bodyText,
-                           @RequestParam("views") Integer views,
-                           @RequestParam("likes") Integer likes, Model model)
+    public String editpost(@PathVariable("id") Long id, @ModelAttribute("news") @Valid News news, BindingResult bindingResult, Model model)
     {
-        News news = newsRepository.findById(id).orElseThrow();
-        news.setName(name);
-        news.setAutor(author);
-        news.setText(bodyText);
-        news.setViews(views);
-        news.setLikes(likes);
+        if (!newsRepository.existsById(id)){return "redirect:/news/";}
+        if (bindingResult.hasErrors()){return "news/edit-news";}
+        news.setId(id);
         newsRepository.save(news);
         return "redirect:/news/";
     }
-
-
 
 }

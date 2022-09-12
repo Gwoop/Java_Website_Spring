@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -12,9 +12,23 @@ public class Films {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String name,dicription,studio;
+  /*  String name,dicription,studio;
     int likes;
-    int dislikes;
+    int dislikes;*/
+
+
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 1000)
+    String name;
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 1000)
+    String dicription;
+    @NotNull(message = "Поле не может быть пустым")
+    String studio;
+    @Min(message = "Число не может быть отрицательным",value = 0)
+    @Max(message = "Число не может быть отрицательным", value = 1000)
+    @NotNull (message = "Обязательно к заполнению")
+    Integer dislikes,likes;
 
     public Films() {
 

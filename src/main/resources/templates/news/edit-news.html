@@ -5,24 +5,36 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<div th:insert="fragments/header :: defaultheader"></div>
-
-<div th:each="el : ${news}">
-  <form th:action="'/news/edit/'+ ${el.id}" method="post">
-    <p>Заголовок</p>
-    <input type="text" th:value="${el.name}" id="name" name="name" placeholder="Название">
-    <p></p>
-    <input type="text" th:value="${el.text}"id="text" name="text" placeholder="оснойвной текст">
-    <input type="text" th:value="${el.autor}"id="autor" name="autor" placeholder="Автор">
-    <input type="number"th:value="${el.views}" id="views" name="views" placeholder="Простомотры">
-    <input type="number"th:value="${el.likes}" id="likes" name="likes" placeholder="Лайки">
-    <input type="submit" value="Изменить" class="btn btn-success">
-  </form>
-
-</div>
-
-
-
+<div th:each="el : ${news}" th:insert="fragments/header :: defaultheader"></div>
+<form  th:action="'/news/edit/'+ *{id}" th:object="${news}" method="post">
+  <p>Заголовок:
+    <input type="text" id="name" th:value="*{name}" name="name" placeholder="Название" >
+  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  </p>
+  <p>Текст:
+    <input type="text" id="text" name="text" th:value="*{text}" placeholder="Текст" >
+  <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
+  </p>
+  <p>Автор:
+    <input type="text" id="autor" name="autor" th:value="*{autor}" placeholder="Автор" >
+  <div th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></div>
+  </p>
+  <p>Просмотры:
+    <input type="number" id="views" name="views" th:value="*{views}" placeholder="Просмотры" >
+  <div th:if="${#fields.hasErrors('views')}" th:errors="*{views}"></div>
+  </p>
+  <p>ЛАйки:
+    <input type="number" id="likes" name="likes" th:value="*{likes}" placeholder="ЛАйки" >
+  <div th:if="${#fields.hasErrors('likes')}" th:errors="*{likes}"></div>
+  </p>
+  <!-- <input type="text" id="name" name="name" placeholder="Название" >
+   <input type="text" id="text" name="text" placeholder="оснойвной текст">
+   <input type="text" id="autor" name="autor" placeholder="Автор">
+   <input type="number" id="views" name="views" placeholder="Простомотры">
+   <input type="number" id="likes" name="likes" placeholder="Лайки">
+   <input type="submit" value="Добавить новость" class="btn btn-success">-->
+  <input type="submit" value="Добавить новость" class="btn btn-success">
+</form>
 <a href="/news/" class="btn btn-primary">назад</a>
 
 </body>

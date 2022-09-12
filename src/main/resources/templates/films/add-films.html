@@ -6,14 +6,29 @@
 </head>
 <body>
 <div th:insert="fragments/header :: defaultheader"></div>
+<form th:object="${news}" action="/films/add" method="post">
+  <p>Заголовок:
+    <input type="text" id="name" name="name" placeholder="Название" >
+  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  </p>
+  <p>Текст:
+    <input type="text" id="description" name="description" placeholder="Текст" >
+  <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+  </p>
+  <p>Автор:
+    <input type="text" id="studio" name="studio" placeholder="Автор" >
+  <div th:if="${#fields.hasErrors('studio')}" th:errors="*{studio}"></div>
+  </p>
+  <p>Просмотры:
+    <input type="number" id="likes" name="likes" placeholder="Просмотры" >
+  <div th:if="${#fields.hasErrors('likes')}" th:errors="*{likes}"></div>
+  </p>
+  <p>ЛАйки:
+    <input type="number" id="dislikes" name="dislikes" placeholder="ЛАйки" >
+  <div th:if="${#fields.hasErrors('dislikes')}" th:errors="*{dislikes}"></div>
+  </p>
 
-<form action="/films/add" method="post">
-  <input type="text" id="name" name="name" placeholder="Название">
-  <input type="text" id="description" name="description" placeholder="Описание фильма">
-  <input type="text" id="studio" name="studio" placeholder="студия">
-  <input type="number" id="likes" name="likes" placeholder="Лайки">
-  <input type="number" id="dislikes" name="dislikes" placeholder="Дизлайки">
-  <input type="submit" value="Добавить новость" class="btn btn-success">
+  <input type="submit" value="Добавить фильм" class="btn btn-success">
 </form>
 
 <a href="/films/" class="btn btn-primary">Назад</a>
