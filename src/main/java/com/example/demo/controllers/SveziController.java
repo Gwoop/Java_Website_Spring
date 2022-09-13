@@ -1,14 +1,8 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.Address;
-import com.example.demo.models.Person;
-import com.example.demo.models.Student;
-import com.example.demo.models.University;
-import com.example.demo.pacege.AddressRepository;
-import com.example.demo.pacege.PersonRepository;
-import com.example.demo.pacege.StudentRepository;
-import com.example.demo.pacege.UniversityRepository;
+import com.example.demo.models.*;
+import com.example.demo.pacege.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +23,11 @@ public class SveziController {
     public AddressRepository addressRepository;
     @Autowired
     public PersonRepository personRepository;
+
+    @Autowired
+    private PasportRepository pasportRepository;
+    @Autowired
+    private PersonRepository1 personRepository1;
 
     @GetMapping("/person")
     private String Main(Model model){
@@ -68,6 +67,24 @@ public class SveziController {
         Person person = new Person(name, adress);
         personRepository.save(person);
         return "relay/person1";
+    }
+
+    @GetMapping("/person2")
+    public String Main2(Model model){
+        Iterable<Pasport> pasport = pasportRepository.findAll();
+        model.addAttribute("pasport", pasport);
+        return "relay/person2";
+    }
+
+    @PostMapping("/person2/add")
+    public String blogPostAdd2(@RequestParam String name, @RequestParam String number, Model model)
+    {
+        System.out.println(name);
+        Pasport pasport = pasportRepository.findByNumber(number);
+        System.out.println(pasport.getId());
+        Person1 person = new Person1(name, pasport);
+        personRepository1.save(person);
+        return "relay/person2";
     }
 
 }

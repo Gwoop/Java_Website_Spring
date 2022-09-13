@@ -3,14 +3,14 @@ package com.example.demo.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class Person {
+@Table (name = "users")
+public class Person1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(optional = true, cascade = CascadeType.DETACH)
-    private Address address;
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    private Pasport pasport;
 
     public Long getId() {
         return id;
@@ -28,19 +28,20 @@ public class Person {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public Pasport getPasport() {
+        return pasport;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setPasport(Pasport pasport) {
+        this.pasport = pasport;
     }
 
-    public Person(String name, Address address) {
+    public Person1(String name, Pasport pasport) {
         this.name = name;
-        this.address = address;
+        this.pasport = pasport;
     }
 
-    public Person() {
+    public Person1() {
     }
 }
+
