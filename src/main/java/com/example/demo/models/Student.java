@@ -1,42 +1,35 @@
 package com.example.demo.models;
 
-
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Student {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @ManyToMany
-    @JoinTable (name="student_university",
-            joinColumns=@JoinColumn (name="student_id"),
-            inverseJoinColumns=@JoinColumn(name="university_id"))
-    private List<University> universities;
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 50)
+    private String fio;
 
-    public Long getId() {
-        return id;
-    }
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 10,max = 50)
+    private String nunmer;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 50)
+    private String email;
 
-    public String getName() {
-        return name;
-    }
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 50)
+    private String describe;
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public List<University> getUniversities() {
-        return universities;
-    }
 
-    public void setUniversities(List<University> universities) {
-        this.universities = universities;
-    }
+    private boolean active;
+
+
+
 }

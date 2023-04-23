@@ -1,30 +1,51 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Person;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
+import com.example.demo.pacege.PersonRepository;
 import com.example.demo.pacege.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 @Controller
 public class RegistrationController {
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
     public String reg_view(Model model)
     {
+
+        model.addAttribute("reg",new User());
+        model.addAttribute("per", new Person());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String reg_action(User user, Model model)
+    public String reg_action(@ModelAttribute("reg") @Valid User user, BindingResult bindingResultreg,
+                             @ModelAttribute("per") @Valid Person person, BindingResult bindingResultper,
+                             @RequestParam("username") String username,
+                             @RequestParam("password") String password,
+                             @RequestParam("name") String name,
+                             @RequestParam("first_name") String first_name,
+                             @RequestParam("middle_name") String middle_name,
+                             Model model)
     {
         User userFromDB = userRepository.findByUsername(user.getUsername());
         if (userFromDB != null)
@@ -35,9 +56,29 @@ public class RegistrationController {
             return "registration";
         }
 
+        if (user.getPassword() == null){
+            model.addAttribute("paswwordval", "Поле не может быть пустым");
+            return "registration";
+        }
+        if(bindingResultreg.hasErrors()) return "registration";
+        if(bindingResultper.hasErrors()) return "registration";
+//        password = passwordEncoder.encode(password);
+        user.setUsername(username);
+//        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        person.setName(name);
+        person.setFirst_name(first_name);
+        person.setMiddle_name(middle_name);
+        personRepository.save(person);
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
+        user.setPerson(person);
         userRepository.save(user);
+
+
+
         return "redirect:/login";
     }
+
+
 }

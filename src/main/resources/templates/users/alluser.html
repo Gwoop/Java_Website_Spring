@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Обзор студентов</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:insert="fragments/header :: defaultheader"></div>
+
+<form method="get" action="/pr/search">
+
+    <input type="text" name="name">
+    <input type="submit" value="Найти">
+
+</form>
+
+<div th:each="el : ${user}">
+    <h2 th:text="${el.username}"></h2>
+    <h3 th:text="${el.password	}"></h3>
+    <a th:href="'/admin/'+ ${el.id}">Подробнее</a>
+    <a th:href="'/admin/edit/'+ ${el.id}">изменить</a>
+
+</div>
+
+<a href="/admin/add" class="btn btn-primary">Добавить студента</a>
+
+</body>
+</html>

@@ -1,16 +1,37 @@
 package com.example.demo.models;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    @ManyToOne(optional = true, cascade = CascadeType.DETACH)
-    private Address address;
+    Long id;
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 30)
+    String name;
+    @NotEmpty(message = "Поле не может быть пустым")
+    @Size(message = "Строка не может быть меньше",min = 3,max = 30)
+    String first_name;
+    @Size(message = "Строка не может быть меньше",min = 3,max = 30)
+    String middle_name;
+    @OneToOne(optional = true, mappedBy = "person")
+    private User user;
+
+    public Person(String name, String first_name, String middle_name, User user) {
+        this.name = name;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.user = user;
+    }
+
+    public Person() {
+    }
+
 
     public Long getId() {
         return id;
@@ -28,19 +49,27 @@ public class Person {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public Person(String name, Address address) {
-        this.name = name;
-        this.address = address;
+    public String getMiddle_name() {
+        return middle_name;
     }
 
-    public Person() {
+    public void setMiddle_name(String middle_name) {
+        this.middle_name = middle_name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
