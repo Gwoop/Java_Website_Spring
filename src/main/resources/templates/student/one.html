@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="el : ${courses}">
+    <h2 th:text="${el.fio}"></h2>
+    <h3 th:text="${el.num}"></h3>
+    <h4 th:text="${el.emal}"></h4>
+    <h5 th:text="${el.des}"></h5>
+    <a href="/student/">назад</a>
+</div>
+</body>
+</html>

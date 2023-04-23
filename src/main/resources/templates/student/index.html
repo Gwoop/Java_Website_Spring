@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Студенты</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<form method="get" action="/pr/search">
+
+  <input type="text" name="name">
+  <input type="submit" value="Найти">
+
+</form>
+
+<div th:each="el : ${student}">
+  <h2 th:text="${el.fio}"></h2>
+  <h3 th:text="${el.des}"></h3>
+  <a th:href="'/student/'+ ${el.id}">Подробнее</a>
+  <a th:href="'/admin/student/edit/'+ ${el.id}">изменить</a>
+  <a th:href="'/admin/student/delete/'+ ${el.id}">удалить</a>
+
+</div>
+
+<a href="/admin/add/stud" class="btn btn-primary">Добавить студента</a>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   <title>Title</title>
 </head>
 <body>
-<div th:each="el : ${user}" th:insert="fragments/header :: defaultheader"></div>
+<div th:each="el : ${user}" ></div>
 <form  th:action="'/admin/edit/'+ *{id}" th:object="${user}" method="post">
   <p>Логин:
     <input type="text" id="username" th:value="*{username}" name="username" placeholder="Логин" >
@@ -30,5 +30,6 @@
 </div>
     <input type="submit" value="Изменить">
 </form>
+<a href="/admin/">назад</a>
 </body>
 </html>

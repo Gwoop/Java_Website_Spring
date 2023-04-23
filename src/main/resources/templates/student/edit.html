@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="el : ${stud}" ></div>
+<form  th:action="'admin/student/edit/'+ *{id}" th:object="${stud}" method="post">
+    <p>ФИО:
+        <input type="text" id="fio" th:value="*{fio}" name="fio" placeholder="Название" >
+    <div th:if="${#fields.hasErrors('fio')}" th:errors="*{fio}"></div>
+    </p>
+    <p>Номер телефона:
+        <input type="text" id="num" name="num" th:value="*{num}" placeholder="Текст" >
+    <div th:if="${#fields.hasErrors('num')}" th:errors="*{num}"></div>
+    </p>
+    <p>Почта:
+        <input type="text" id="emal" name="emal" th:value="*{emal}" placeholder="Автор" >
+    <div th:if="${#fields.hasErrors('emal')}" th:errors="*{emal}"></div>
+    </p>
+    <p>Описание:
+        <input type="text" id="des" name="des" th:value="*{des}" placeholder="Автор" >
+    <div th:if="${#fields.hasErrors('des')}" th:errors="*{des}"></div>
+    </p>
+        <input type="submit" value="Изменить" class="btn btn-success">
+    <a href="/student/">назад</a>
+</form>
+
+
+</body>
+</html>
