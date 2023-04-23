@@ -9,6 +9,7 @@ import com.example.demo.pacege.PersonRepository;
 import com.example.demo.pacege.StudentRepository;
 import com.example.demo.pacege.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,13 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@Controller // контролеры
+@PreAuthorize("hasAnyAuthority('ADMIN')") // вход только для роли ADMIN
 @RequestMapping("/admin")
-//@PreAuthorize("hasAnyAuthority('ADMIN')")
+
 public class Admin {
 
+
+
+
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository; // Вызов функции для взаимодейсвия с таблицей
 
     @Autowired
     private PersonRepository personRepository;
@@ -36,6 +41,7 @@ public class Admin {
     public String all_user(Model model){
         Iterable<User> pr = userRepository.findAll();
         model.addAttribute("user",pr);
+
         return "users/alluser";
     }
 

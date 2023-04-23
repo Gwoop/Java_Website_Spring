@@ -17,10 +17,14 @@
 <div th:each="el : ${user}">
     <h2 th:text="${el.username}"></h2>
     <h3 th:text="${el.password	}"></h3>
+    <h3 th:text="${el.person.name}"></h3>
+    <h3 th:text="${el.person.first_name}"></h3>
+    <h3 th:text="${el.person.middle_name}"></h3>
     <a th:href="'/admin/'+ ${el.id}">Подробнее</a>
     <a th:href="'/admin/edit/'+ ${el.id}">изменить</a>
-
 </div>
+
+
 
 <a href="/admin/add" class="btn btn-primary">Добавить студента</a>
 

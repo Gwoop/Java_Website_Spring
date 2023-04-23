@@ -17,12 +17,12 @@
   <h2 th:text="${el.fio}"></h2>
   <h3 th:text="${el.des}"></h3>
   <a th:href="'/student/'+ ${el.id}">Подробнее</a>
-  <a th:href="'/admin/student/edit/'+ ${el.id}">изменить</a>
   <a th:href="'/admin/student/delete/'+ ${el.id}">удалить</a>
 
 </div>
 
 <a href="/admin/add/stud" class="btn btn-primary">Добавить студента</a>
+<a href="/logout" class="btn btn-primary">Выход из аккаунта</a>
 
 </body>
 </html>
